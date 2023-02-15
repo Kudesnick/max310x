@@ -4,16 +4,7 @@
 / {
 	compatible = "brcm,bcm2835", "brcm,bcm2708", "brcm,bcm2709";
 
-	&spi1 {
-		&spidev0 {
-			status = "disabled";
-		};
-		&spidev1 {
-			status = "disabled";
-		};
-	};
-
-	&clocks {
+	clocks {
 		xtal36: xtal36@7 {
 			reg = <0x07>;
 			compatible = "fixed-clock";
@@ -23,13 +14,13 @@
 		};
 	};
 
-	&spi1 {
-		/* needed to avoid dtc warning */
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		status = "okay";
-
+	spi@1 {
+		spidev@0 {
+			status = "disabled";
+		};
+		spidev@1 {
+			status = "disabled";
+		};
 
 		max14830_1: max14830_1@0 {
 			compatible = "maxim,max14830";
@@ -43,15 +34,6 @@
 			spi-max-frequency = <12000000>;
 			status = "okay";
 		};
-	};
-
-	&spi1 {
-		/* needed to avoid dtc warning */
-		#address-cells = <1>;
-		#size-cells = <0>;
-
-		status = "okay";
-
 
 		max14830_2: max14830_2@0 {
 			compatible = "maxim,max14830";
@@ -67,7 +49,7 @@
 		};
 	};
 
-	&gpio {
+	gpio {
 		irq0_pin: irq0_pin {
 			brcm,pins = <22>;
 			brcm,function = <0>; /* in */
