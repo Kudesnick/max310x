@@ -12,4 +12,5 @@ install: max310x.ko
 	xz -c max310x.ko > $(KERNELDIR)/kernel/drivers/tty/serial/max310x.ko.xz
 
 reload:
-	rmmod max310x && modprobe max310x
+	depmod
+	rmmod max310x ; modprobe max310x
